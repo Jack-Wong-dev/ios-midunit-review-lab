@@ -371,33 +371,26 @@ Input: `Never trust a computer you can't throw out a window ~ Steve Wozniak`
 Output `o`
 
 ```swift
-let str = "Never trust a computer you can't throw out a window ~ Steve Wozniak"
-var arr = Array(str)
-var dict = [Character:Int]()
+let input = "Never trust a computer you can't throw out a window ~ Steve Wozniak"
 let alphabet = "abcdefghijklmnopqrstuvwxyz"
+var frequencyDict = [Character: Int]()
 
-for c in arr where alphabet.contains(c.lowercased()){
-    if dict.keys.contains(c){
-        dict.updateValue(dict[c]! + 1, forKey: c)
-    }else{
-        dict[c] = 1
+for character in input where alphabet.contains(character.lowercased()){
+    if let value = frequencyDict[character] {
+        frequencyDict[character] = value + 1
+    } else {
+        frequencyDict[character] = 1
     }
 }
 
-var mostFrequentValue = 0
-var mostFrequentLetter = String()
-var secondFrequentValue = mostFrequentValue
-var secondFrequentLetter = mostFrequentLetter
-
-for (key,value) in dict{
-    if mostFrequentValue < value{
-        secondFrequentValue = mostFrequentValue
-        mostFrequentValue = value
-        secondFrequentLetter = mostFrequentLetter
-        mostFrequentLetter = String(key)
-    }
+var mostFrequent = (Character(" "), 0)
+var secondMostFrequent = mostFrequent
+for (key, value) in frequencyDict where value > mostFrequent.1 {
+    secondMostFrequent = mostFrequent
+    mostFrequent = (key, value)
 }
-print(secondFrequentLetter)
+
+print("The most frequent letter is \(secondMostFrequent.0) with \(secondMostFrequent.1) occurances.")
 ```
 
 ## Closures
