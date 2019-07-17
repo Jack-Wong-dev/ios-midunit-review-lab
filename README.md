@@ -311,7 +311,7 @@ Output: `t`
 
 ```swift
 let str = "Never trust a computer you can't throw out a window ~ Steve Wozniak"
-var arr = Array(str)
+var arr = Array(str.lowercased())
 var dict = [Character:Int]()
 let alphabet = "abcdefghijklmnopqrstuvwxyz"
 
